@@ -1,0 +1,270 @@
+import { motion } from "motion/react";
+import { useState } from "react";
+import emailjs from "emailjs-com";
+import { AnimatePresence } from "framer-motion";
+import { MapPin, Phone, Clock, Mail } from "lucide-react";
+import { FaInstagram, FaFacebookF, FaYoutube, FaLinkedinIn, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+
+
+export function ContactUs() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    countryCode: "+91",
+    phone: ""
+  });
+
+  const [success, setSuccess] = useState("");
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    let err: { [key: string]: string } = {};
+
+    if (!form.name) err.name = "Name required";
+    if (!form.email || !/\S+@\S+\.\S+/.test(form.email))
+      err.email = "Valid email required";
+    if (!form.phone || !/^[0-9]{10}$/.test(form.phone))
+      err.phone = "Enter valid number";
+
+    return err;
+  };
+
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+
+    const v = validate();
+    setErrors(v);
+
+    if (Object.keys(v).length === 0) {
+
+      const templateParams = {
+        from_name: form.name,
+        from_email: form.email,
+        phone: `${form.countryCode} ${form.phone}`,
+        to_email: "2100031756cseh@gmail.com"
+      };
+
+      emailjs.send(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        templateParams,
+        "YOUR_PUBLIC_KEY"
+      )
+        .then(() => {
+          setSuccess("Message sent successfully 🚀");
+          setForm({ name: "", email: "", countryCode: "+91", phone: "" });
+        })
+        .catch(() => {
+          setSuccess("Failed to send ❌");
+        });
+    }
+  };
+  return (
+    <>
+      <div className="min-h-screen bg-[#030305] text-white flex flex-col md:flex-row items-stretch justify-center relative overflow-hidden">
+
+        {/* Glitching horizontal division line */}
+        <motion.div
+          className="absolute top-1/2 left-0 w-full h-[1px] bg-white/20 z-0 hidden md:block"
+          animate={{ opacity: [0.2, 0.8, 0.2], y: [-2, 2, -2] }}
+          transition={{ duration: 0.1, repeat: Infinity, repeatType: "mirror" }}
+        />
+
+        <div className="flex-1 flex items-center justify-center p-8 md:p-20 relative z-10 border-b md:border-b-0 md:border-r border-white/10">
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-xl"
+          >
+            <div className="flex-1 flex items-center justify-center p-10 border-r border-white/10">
+              <div className="max-w-md">
+                <h2 className="text-5xl font-light">
+                  Connect with<br />Our Team
+                </h2>
+                <p className="text-white/50 mt-6">
+                  Our team helps you build and scale with confidence.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="flex-1 flex items-center justify-center p-8 md:p-20 relative z-10">
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1.5, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-xl w-full flex justify-start md:justify-end text-left md:text-right"
+          >
+            <div className="flex-1 flex items-center justify-center p-10">
+              <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6">
+
+                <input
+                  name="name"
+                  placeholder="Your Name"
+                  value={form.name}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-white/20 p-2"
+                />
+                {errors.name && <p className="text-red-400 text-xs">{errors.name}</p>}
+
+                <input
+                  name="email"
+                  placeholder="Your Email"
+                  value={form.email}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-white/20 p-2"
+                />
+                {errors.email && <p className="text-red-400 text-xs">{errors.email}</p>}
+
+                <div className="flex gap-3">
+                  <div className="relative w-24">
+                    <select
+                      name="countryCode"
+                      value={form.countryCode}
+                      onChange={handleChange}
+                      className="w-full bg-transparent border-b border-white/20 p-2 pr-6 outline-none text-white appearance-none"
+                    >
+                      <option value="+91" className="bg-black text-white">+91</option>
+                      <option value="+1" className="bg-black text-white">+1</option>
+                      <option value="+44" className="bg-black text-white">+44</option>
+                      <option value="+61" className="bg-black text-white">+61</option>
+                    </select>
+
+                    {/* Arrow */}
+                    <span className="absolute right-1 top-1/2 -translate-y-1/2 text-white/40 text-xs">
+                      ▼
+                    </span>
+                  </div>
+                  <input
+                    name="phone"
+                    placeholder="Phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    className="flex-1 bg-transparent border-b border-white/20 p-2"
+                  />
+                </div>
+                {errors.phone && <p className="text-red-400 text-xs">{errors.phone}</p>}
+
+                <button className="border px-6 py-2 rounded-full hover:bg-white hover:text-black transition">
+                  Submit →
+                </button>
+
+                {success && (
+                  <div className="border border-green-500 text-green-400 p-3 text-sm">
+                    {success}
+                  </div>
+                )}
+
+              </form>
+            </div>
+          </motion.div>
+        </div>
+
+      </div>
+      <ContactInfo />
+    </>
+  );
+}
+
+// Separate component for contact info cards and social media links
+export function ContactInfo() {
+  return (
+    <div className="w-full bg-[#030305] text-white px-6 md:px-20 py-20">
+
+      {/* Cards */}
+      <div className="grid md:grid-cols-2 gap-6">
+
+        {/* Address */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="flex gap-4 p-6 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md"
+        >
+          <div className="w-12 h-12 flex items-center justify-center bg-white/10 rounded-lg shrink-0">
+            <MapPin className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-lg">Address</h3>
+            <p className="text-white/60 text-sm mt-1">
+              3rd Floor, The Business Park – Pranava Group, Beside Harsha Toyota Showroom,
+              Landmark Residency, Kothaguda, Hyderabad, Telangana – 500084, India.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Mobile */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="flex gap-4 p-6 rounded-xl border border-white/10 bg-white/5"
+        >
+          <div className="w-12 h-12 flex items-center justify-center bg-white/10 rounded-lg shrink-0">
+            <Phone className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-lg">Mobile</h3>
+            <p className="text-white/60 text-sm mt-1">+91 7386095518</p>
+          </div>
+        </motion.div>
+
+        {/* Availability */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="flex gap-4 p-6 rounded-xl border border-white/10 bg-white/5"
+        >
+          <div className="w-12 h-12 flex items-center justify-center bg-white/10 rounded-lg shrink-0">
+            <Clock className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-lg">Availability</h3>
+            <p className="text-white/60 text-sm mt-1">Daily 09 am – 06 pm</p>
+          </div>
+        </motion.div>
+
+        {/* Email */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          className="flex gap-4 p-6 rounded-xl border border-white/10 bg-white/5"
+        >
+          <div className="w-12 h-12 flex items-center justify-center bg-white/10 rounded-lg shrink-0">
+            <Mail className="w-5 h-5 text-white" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-lg">Email</h3>
+            <p className="text-white/60 text-sm mt-1">
+              support@axioraglobalsolutions.com
+            </p>
+          </div>
+        </motion.div>
+
+      </div>
+
+      {/* Divider */}
+      <div className="border-t border-white/10 my-12"></div>
+
+      {/* Social Media */}
+      <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <p className="text-white/60 text-sm">Social Media:</p>
+
+        <div className="flex gap-4">
+
+          {[FaInstagram, FaXTwitter, FaFacebookF, FaYoutube, FaLinkedinIn, FaWhatsapp].map((Icon, i) => (
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.2, rotate: 5 }}
+              className="w-10 h-10 flex items-center justify-center border border-white/20 rounded-md cursor-pointer hover:bg-white/10 transition"
+            >
+              <Icon size={16} />
+            </motion.div>
+          ))}
+
+        </div>
+      </div>
+
+    </div>
+  );
+}
