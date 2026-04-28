@@ -59,7 +59,7 @@ export function Convergence() {
           <button className="group relative interactive px-12 py-5 overflow-hidden flex items-center justify-center min-w-[240px] bg-white text-black">
             <div className="absolute inset-0 bg-black/10 scale-x-0 origin-right transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
             <span className="font-['JetBrains_Mono'] text-sm tracking-[0.2em] uppercase font-semibold relative z-10">
-              Initialize Nexora
+              Initialize Axiora
             </span>
           </button>
         </motion.div>

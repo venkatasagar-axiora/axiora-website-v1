@@ -184,7 +184,7 @@ export function SystemMap({
                   <div className="w-2 h-2 rounded-full bg-white/60 group-hover:bg-white group-hover:scale-150 transition-all duration-500 shadow-[0_0_10px_rgba(255,255,255,0.3)] group-hover:shadow-[0_0_25px_rgba(255,255,255,1)]" />
 
                   <span className="font-['JetBrains_Mono'] text-[10px] tracking-[0.3em] text-white/70 group-hover:text-white transition-colors duration-500 absolute top-6 whitespace-nowrap text-center">
-                    [{node.id}]<br />{node.label}
+                    {node.label}
                   </span>
                 </motion.div>
               ))}

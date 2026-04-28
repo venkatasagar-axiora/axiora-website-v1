@@ -94,7 +94,7 @@ export function Layout() {
           </div>
 
           <div className="absolute bottom-6 right-6 font-['JetBrains_Mono'] text-[10px] text-white/30 tracking-[0.2em] text-right  uppercase">
-            NEXORA KERNEL v9.4.1<br />
+            Axiora KERNEL v9.4.1<br />
             SECURE CONNECTION
           </div>
         </div>

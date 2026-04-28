@@ -215,15 +215,34 @@ export default function ApplyForm() {
           <input type="hidden" name="SingleLine" value={form.position} />
 
           {/* File */}
-          <div>
+          <div className="w-full">
+            <label
+              htmlFor="resumeUpload"
+              className="flex flex-col items-center justify-center w-full p-6 border border-dashed border-white/20 rounded-xl cursor-pointer hover:border-white/40 transition"
+            >
+              <span className="text-white/60 text-sm mb-2">
+                {form.resume ? "✅ File Selected" : "📄 Upload Resume (PDF only)"}
+              </span>
+
+              <span className="text-xs text-white/40">
+                Click to upload or drag & drop
+              </span>
+
+              {form.resume && (
+                <p className="text-green-400 text-xs mt-2">
+                  {form.resume.name}
+                </p>
+              )}
+            </label>
+
             <input
+              id="resumeUpload"
               type="file"
               name="FileUpload"
               accept=".pdf"
               onChange={handleFileChange}
-              className="text-white/60"
+              className="hidden"
             />
-            {errors.resume && <p className="text-red-400 text-xs">{errors.resume}</p>}
           </div>
 
           {/* Cover */}

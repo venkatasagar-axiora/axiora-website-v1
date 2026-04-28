@@ -338,7 +338,7 @@ export function CTASection() {
           </h2>
 
           <p className="text-white/50 mt-6 text-sm md:text-base max-w-md">
-            Partner with Nexora to implement intelligent platforms, optimize operations, and accelerate digital growth.
+            Partner with Axiora to implement intelligent platforms, optimize operations, and accelerate digital growth.
           </p>
 
           {/* BUTTON */}

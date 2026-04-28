@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Rocket, TrendingUp, Scale } from "lucide-react";
 import ApplyForm from "./ApplyForm";
+import { useNavigate } from "react-router-dom";
 
 export function Career() {
   // const [position, setPosition] = useState("");
@@ -63,7 +64,7 @@ export function Career() {
       </div>
       <WhyChooseUs />
       <JobsSection />
-      <ApplyForm />
+      <ApplyForm/>
     </>
   );
 }
@@ -219,6 +220,7 @@ const jobs = [
 ];
 
 export function JobsSection() {
+  const navigate = useNavigate();
   return (
     <section className="w-full bg-[#030305] text-white py-24 px-6">
 
@@ -275,7 +277,8 @@ export function JobsSection() {
             </ul>
 
             {/* Button */}
-            <button className="border border-white/20 px-5 py-2 rounded-full text-sm hover:bg-white hover:text-black transition">
+            <button className="border border-white/20 px-5 py-2 rounded-full text-sm hover:bg-white hover:text-black transition"
+              onClick={() => navigate("/apply")}>
               Apply Now →
             </button>
           </motion.div>

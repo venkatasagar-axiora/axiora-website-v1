@@ -82,7 +82,7 @@ function Layer2_Illusion({ progress }: { progress: any }) {
   );
 }
 
-function Layer3_NexoraCore({ progress }: { progress: any }) {
+function Layer3_AxioraCore({ progress }: { progress: any }) {
   const z = useTransform(progress, [0.25, 0.45, 0.6], [-3000, 0, 2000]);
   const y = useTransform(progress, [0.25, 0.45, 0.6], [1000, 0, -1000]);
   const rotateX = useTransform(progress, [0.25, 0.45, 0.6], [-45, 0, 45]);
@@ -200,7 +200,7 @@ function Layer6_Convergence({ progress }: { progress: any }) {
           <button className="group relative interactive px-12 py-5 overflow-hidden flex items-center justify-center min-w-[240px] bg-white text-black">
             <div className="absolute inset-0 bg-black/10 scale-x-0 origin-right transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100" />
             <span className="font-['JetBrains_Mono'] text-sm tracking-[0.2em] uppercase font-semibold relative z-10">
-              Initialize Nexora
+              Initialize Axiora
             </span>
           </button>
 
@@ -229,7 +229,7 @@ export function Home() {
       >
         <Layer1_Gateway progress={springProgress} />
         <Layer2_Illusion progress={springProgress} />
-        <Layer3_NexoraCore progress={springProgress} />
+        <Layer3_AxioraCore progress={springProgress} />
         <Layer4_Void progress={springProgress} />
         <Layer5_Temporal progress={springProgress} />
         <Layer6_Convergence progress={springProgress} />
