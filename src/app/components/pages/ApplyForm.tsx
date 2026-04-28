@@ -160,6 +160,7 @@ export default function ApplyForm() {
               <input
                 name="Name_First"
                 placeholder="First Name"
+                type="text"
                 onChange={handleChange}
                 className="w-full bg-transparent border-b border-white/20 p-2 outline-none"
               />
@@ -170,6 +171,7 @@ export default function ApplyForm() {
               <input
                 name="Name_Last"
                 placeholder="Last Name"
+                type="text"
                 onChange={handleChange}
                 className="w-full bg-transparent border-b border-white/20 p-2 outline-none"
               />
@@ -182,6 +184,7 @@ export default function ApplyForm() {
             <div>
               <input
                 name="Email"
+                type="email"
                 placeholder="Email Address"
                 onChange={handleChange}
                 className="w-full bg-transparent border-b border-white/20 p-2 outline-none"
@@ -193,6 +196,7 @@ export default function ApplyForm() {
               <input
                 name="PhoneNumber_countrycode"
                 placeholder="Phone"
+                type="number"
                 onChange={handleChange}
                 className="w-full bg-transparent border-b border-white/20 p-2 outline-none"
               />
@@ -226,6 +230,7 @@ export default function ApplyForm() {
           <textarea
             name="MultiLine"
             placeholder="Cover Letter"
+            typeof="text"
             rows={5}
             className="w-full bg-transparent border border-white/20 p-3 outline-none"
           />

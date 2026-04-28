@@ -80,6 +80,7 @@ export function ContactUs() {
                   <div className="flex-1">
                     <input
                       name="Name_First"
+                      type="text"
                       placeholder="First Name"
                       className="w-full bg-transparent border-b border-white/20 p-2"
                     />
@@ -91,6 +92,7 @@ export function ContactUs() {
                   <div className="flex-1">
                     <input
                       name="Name_Last"
+                      type="text"
                       placeholder="Last Name"
                       className="w-full bg-transparent border-b border-white/20 p-2"
                     />
@@ -103,6 +105,7 @@ export function ContactUs() {
 
                 <input
                   name="Email"
+                  type="email"
                   placeholder="Your Email"
                   className="w-full bg-transparent border-b border-white/20 p-2"
                 />
@@ -128,6 +131,7 @@ export function ContactUs() {
                   <input
                     name="PhoneNumber_countrycode"
                     placeholder="Phone"
+                    type="number"
                     className="flex-1 bg-transparent border-b border-white/20 p-2"
                   />
 
@@ -135,6 +139,7 @@ export function ContactUs() {
                 {errors.phone && <p className="text-red-400 text-xs">{errors.phone}</p>}
                 <textarea
                   name="MultiLine"
+                  typeof="text"
                   placeholder="Your Query / Message"
                   rows={4}
                   className="w-full bg-transparent border-b border-white/20 p-2 resize-none"
