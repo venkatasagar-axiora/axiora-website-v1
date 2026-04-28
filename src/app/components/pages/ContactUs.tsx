@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { useState } from "react";
-import emailjs from "emailjs-com";
 import { AnimatePresence } from "framer-motion";
 import { MapPin, Phone, Clock, Mail } from "lucide-react";
 import { FaInstagram, FaFacebookF, FaYoutube, FaLinkedinIn, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
@@ -8,61 +7,25 @@ import { FaInstagram, FaFacebookF, FaYoutube, FaLinkedinIn, FaWhatsapp, FaXTwitt
 
 export function ContactUs() {
   const [form, setForm] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     countryCode: "+91",
-    phone: ""
+    phone: "",
+    query: ""
   });
 
   const [success, setSuccess] = useState("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const validate = () => {
-    let err: { [key: string]: string } = {};
+  
 
-    if (!form.name) err.name = "Name required";
-    if (!form.email || !/\S+@\S+\.\S+/.test(form.email))
-      err.email = "Valid email required";
-    if (!form.phone || !/^[0-9]{10}$/.test(form.phone))
-      err.phone = "Enter valid number";
-
-    return err;
-  };
-
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-
-    const v = validate();
-    setErrors(v);
-
-    if (Object.keys(v).length === 0) {
-
-      const templateParams = {
-        from_name: form.name,
-        from_email: form.email,
-        phone: `${form.countryCode} ${form.phone}`,
-        to_email: "2100031756cseh@gmail.com"
-      };
-
-      emailjs.send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        templateParams,
-        "YOUR_PUBLIC_KEY"
-      )
-        .then(() => {
-          setSuccess("Message sent successfully 🚀");
-          setForm({ name: "", email: "", countryCode: "+91", phone: "" });
-        })
-        .catch(() => {
-          setSuccess("Failed to send ❌");
-        });
-    }
-  };
+  
   return (
     <>
       <div className="min-h-screen bg-[#030305] text-white flex flex-col md:flex-row items-stretch justify-center relative overflow-hidden">
@@ -102,57 +65,80 @@ export function ContactUs() {
             className="max-w-xl w-full flex justify-start md:justify-end text-left md:text-right"
           >
             <div className="flex-1 flex items-center justify-center p-10">
-              <form onSubmit={handleSubmit} className="w-full max-w-md space-y-6">
+              <form action={"https://forms.zohopublic.in/venkat214326gm1/form/ContactUs/formperma/cc2wkLJfMqlz9uhPaFGnugdinR-yFZPuyS-8mNAJvlU/htmlRecords/submit"} name='form' id='form' method='POST' accept-charset='UTF-8' encType='multipart/form-data'  className="w-full max-w-md space-y-6">
+
+                <div className="flex gap-4">
+
+                  <div className="flex-1">
+                    <input
+                      name="Name_First"
+                      placeholder="First Name"
+                      className="w-full bg-transparent border-b border-white/20 p-2"
+                    />
+                    {errors.firstName && (
+                      <p className="text-red-400 text-xs">{errors.firstName}</p>
+                    )}
+                  </div>
+
+                  <div className="flex-1">
+                    <input
+                      name="Name_Last"
+                      placeholder="Last Name"
+                      className="w-full bg-transparent border-b border-white/20 p-2"
+                    />
+                    {errors.lastName && (
+                      <p className="text-red-400 text-xs">{errors.lastName}</p>
+                    )}
+                  </div>
+
+                </div>
 
                 <input
-                  name="name"
-                  placeholder="Your Name"
-                  value={form.name}
-                  onChange={handleChange}
-                  className="w-full bg-transparent border-b border-white/20 p-2"
-                />
-                {errors.name && <p className="text-red-400 text-xs">{errors.name}</p>}
-
-                <input
-                  name="email"
+                  name="Email"
                   placeholder="Your Email"
-                  value={form.email}
-                  onChange={handleChange}
                   className="w-full bg-transparent border-b border-white/20 p-2"
                 />
                 {errors.email && <p className="text-red-400 text-xs">{errors.email}</p>}
 
                 <div className="flex gap-3">
-                  <div className="relative w-24">
-                    <select
-                      name="countryCode"
-                      value={form.countryCode}
-                      onChange={handleChange}
+                  {/* <div className="relative w-24"> */}
+                    {/* <select
+                      name="PhoneNumber_countrycode"
                       className="w-full bg-transparent border-b border-white/20 p-2 pr-6 outline-none text-white appearance-none"
                     >
                       <option value="+91" className="bg-black text-white">+91</option>
                       <option value="+1" className="bg-black text-white">+1</option>
                       <option value="+44" className="bg-black text-white">+44</option>
                       <option value="+61" className="bg-black text-white">+61</option>
-                    </select>
+                    </select> */}
 
                     {/* Arrow */}
-                    <span className="absolute right-1 top-1/2 -translate-y-1/2 text-white/40 text-xs">
+                    {/* <span className="absolute right-1 top-1/2 -translate-y-1/2 text-white/40 text-xs">
                       ▼
-                    </span>
-                  </div>
+                    </span> */}
+                  {/* </div> */}
                   <input
-                    name="phone"
+                    name="PhoneNumber_countrycode"
                     placeholder="Phone"
-                    value={form.phone}
-                    onChange={handleChange}
                     className="flex-1 bg-transparent border-b border-white/20 p-2"
                   />
+
                 </div>
                 {errors.phone && <p className="text-red-400 text-xs">{errors.phone}</p>}
+                <textarea
+                  name="MultiLine"
+                  placeholder="Your Query / Message"
+                  rows={4}
+                  className="w-full bg-transparent border-b border-white/20 p-2 resize-none"
+                />
+                {errors.query && <p className="text-red-400 text-xs">{errors.query}</p>}
 
-                <button className="border px-6 py-2 rounded-full hover:bg-white hover:text-black transition">
-                  Submit →
+                <button
+                  disabled={loading}
+                  className="border px-6 py-2 rounded-full hover:bg-white hover:text-black transition disabled:opacity-50"
+                  type="submit"
+                >
+                  {loading ? "Submitting..." : "Submit →"}
                 </button>
 
                 {success && (
