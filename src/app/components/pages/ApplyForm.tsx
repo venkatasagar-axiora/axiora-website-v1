@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { toast } from "react-toastify";
 
 /* ---------------- JOB DATA ---------------- */
 export const Jobs = [
@@ -97,7 +98,7 @@ export default function ApplyForm() {
   }>({});
 
   /* ---------- HANDLE INPUT ---------- */
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; files: any; }; }) => {
     const { name, value, files } = e.target;
     setForm({
       ...form,
@@ -105,34 +106,9 @@ export default function ApplyForm() {
     });
   };
 
-  /* ---------- VALIDATION ---------- */
-  const validate = () => {
-    let err = {};
-
-    if (!form.firstName) err.firstName = "Required";
-    if (!form.lastName) err.lastName = "Required";
-
-    if (!form.email) err.email = "Required";
-    else if (!/\S+@\S+\.\S+/.test(form.email)) err.email = "Invalid email";
-
-    if (!form.phone) err.phone = "Required";
-    if (!form.position) err.position = "Select a position";
-    if (!form.resume) err.resume = "Upload resume";
-
-    return err;
-  };
 
   /* ---------- SUBMIT ---------- */
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const v = validate();
-    setErrors(v);
 
-    if (Object.keys(v).length === 0) {
-      console.log(form);
-      alert("Application Submitted 🚀");
-    }
-  };
 
   return (
     <section className="bg-[#030305] text-white py-20 px-6">
@@ -152,13 +128,17 @@ export default function ApplyForm() {
         </div>
 
         {/* FORM */}
-        <form onSubmit={handleSubmit} className="space-y-8">
-
+        <form action='https://forms.zohopublic.in/axioraglobalsolutions1/form/Careerform/formperma/SfKdarrKy2G61yo1yCs6IbOnu4sLqX1GGrWoUlm1G2g/htmlRecords/submit' name='form' id='form' method='POST'
+          acceptCharset="UTF-8" encType='multipart/form-data'
+          target="hidden_iframe"
+          onSubmit={() => toast.success("✅ Application submitted successfully")}
+          className="space-y-8">
+          <input type="hidden" name="zf_redirect_url" value="http://localhost:5173/careers" />
           {/* Row 1 */}
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <input
-                name="firstName"
+                name="Name_First"
                 placeholder="First Name"
                 onChange={handleChange}
                 className="w-full bg-transparent border-b border-white/20 p-2 outline-none"
@@ -168,7 +148,7 @@ export default function ApplyForm() {
 
             <div>
               <input
-                name="lastName"
+                name="Name_Last"
                 placeholder="Last Name"
                 onChange={handleChange}
                 className="w-full bg-transparent border-b border-white/20 p-2 outline-none"
@@ -181,7 +161,7 @@ export default function ApplyForm() {
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <input
-                name="email"
+                name="Email"
                 placeholder="Email Address"
                 onChange={handleChange}
                 className="w-full bg-transparent border-b border-white/20 p-2 outline-none"
@@ -191,7 +171,7 @@ export default function ApplyForm() {
 
             <div>
               <input
-                name="phone"
+                name="PhoneNumber_countrycode"
                 placeholder="Phone"
                 onChange={handleChange}
                 className="w-full bg-transparent border-b border-white/20 p-2 outline-none"
@@ -207,12 +187,14 @@ export default function ApplyForm() {
             error={errors.position}
           />
 
+          {/* ✅ THIS IS REQUIRED */}
+          <input type="hidden" name="SingleLine" value={form.position} />
+
           {/* File */}
           <div>
             <input
               type="file"
-              name="resume"
-              onChange={handleChange}
+              name="FileUpload"
               className="text-white/60"
             />
             {errors.resume && <p className="text-red-400 text-xs">{errors.resume}</p>}
@@ -220,10 +202,9 @@ export default function ApplyForm() {
 
           {/* Cover */}
           <textarea
-            name="cover"
+            name="MultiLine"
             placeholder="Cover Letter"
             rows={5}
-            onChange={handleChange}
             className="w-full bg-transparent border border-white/20 p-3 outline-none"
           />
 

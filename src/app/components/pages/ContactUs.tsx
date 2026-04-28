@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { MapPin, Phone, Clock, Mail } from "lucide-react";
 import { FaInstagram, FaFacebookF, FaYoutube, FaLinkedinIn, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+import { toast } from "react-toastify";
 
 
 export function ContactUs() {
@@ -65,7 +66,14 @@ export function ContactUs() {
             className="max-w-xl w-full flex justify-start md:justify-end text-left md:text-right"
           >
             <div className="flex-1 flex items-center justify-center p-10">
-              <form action={"https://forms.zohopublic.in/axioraglobalsolutions1/form/ContactUS/formperma/dF63x7OqlIrW6B5WmMKBcX7dKn2onhZlzsOphZnCcOw/htmlRecords/submit"} name='form' id='form' method='POST' accept-charset='UTF-8' encType='multipart/form-data' className="w-full max-w-md space-y-6">
+              <form action={"https://forms.zohopublic.in/axioraglobalsolutions1/form/ContactUS/formperma/dF63x7OqlIrW6B5WmMKBcX7dKn2onhZlzsOphZnCcOw/htmlRecords/submit"} name='form' id='form' method='POST' accept-charset='UTF-8' encType='multipart/form-data'
+                target="hidden_iframe"
+                onSubmit={() => {
+                  setTimeout(() => {
+                    toast.success("✅ Information submitted successfully");
+                  }, 800);
+                }}
+                className="w-full max-w-md space-y-6">
 
                 <div className="flex gap-4">
 
