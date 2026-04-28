@@ -23,9 +23,9 @@ export function ContactUs() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  
 
-  
+
+
   return (
     <>
       <div className="min-h-screen bg-[#030305] text-white flex flex-col md:flex-row items-stretch justify-center relative overflow-hidden">
@@ -65,7 +65,7 @@ export function ContactUs() {
             className="max-w-xl w-full flex justify-start md:justify-end text-left md:text-right"
           >
             <div className="flex-1 flex items-center justify-center p-10">
-              <form action={"https://forms.zohopublic.in/venkat214326gm1/form/ContactUs/formperma/cc2wkLJfMqlz9uhPaFGnugdinR-yFZPuyS-8mNAJvlU/htmlRecords/submit"} name='form' id='form' method='POST' accept-charset='UTF-8' encType='multipart/form-data'  className="w-full max-w-md space-y-6">
+              <form action={"https://forms.zohopublic.in/axioraglobalsolutions1/form/ContactUS/formperma/dF63x7OqlIrW6B5WmMKBcX7dKn2onhZlzsOphZnCcOw/htmlRecords/submit"} name='form' id='form' method='POST' accept-charset='UTF-8' encType='multipart/form-data' className="w-full max-w-md space-y-6">
 
                 <div className="flex gap-4">
 
@@ -102,7 +102,7 @@ export function ContactUs() {
 
                 <div className="flex gap-3">
                   {/* <div className="relative w-24"> */}
-                    {/* <select
+                  {/* <select
                       name="PhoneNumber_countrycode"
                       className="w-full bg-transparent border-b border-white/20 p-2 pr-6 outline-none text-white appearance-none"
                     >
@@ -112,8 +112,8 @@ export function ContactUs() {
                       <option value="+61" className="bg-black text-white">+61</option>
                     </select> */}
 
-                    {/* Arrow */}
-                    {/* <span className="absolute right-1 top-1/2 -translate-y-1/2 text-white/40 text-xs">
+                  {/* Arrow */}
+                  {/* <span className="absolute right-1 top-1/2 -translate-y-1/2 text-white/40 text-xs">
                       ▼
                     </span> */}
                   {/* </div> */}
