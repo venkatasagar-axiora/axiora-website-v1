@@ -70,7 +70,7 @@ export function ContactUs() {
                 target="hidden_iframe"
                 onSubmit={() => {
                   setTimeout(() => {
-                    toast.success("✅ Information submitted successfully");
+                    toast.success("Information submitted successfully");
                   }, 800);
                 }}
                 className="w-full max-w-md space-y-6">

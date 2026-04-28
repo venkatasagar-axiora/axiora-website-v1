@@ -108,6 +108,26 @@ export default function ApplyForm() {
 
 
   /* ---------- SUBMIT ---------- */
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    // Check file type
+    if (file.type !== "application/pdf") {
+      toast.error("Only PDF files are allowed");
+
+      // reset input
+      e.target.value = "";
+      return;
+    }
+
+    // Save valid file
+    setForm({
+      ...form,
+      resume: file
+    });
+  };
 
 
   return (
@@ -131,7 +151,7 @@ export default function ApplyForm() {
         <form action='https://forms.zohopublic.in/axioraglobalsolutions1/form/Careerform/formperma/SfKdarrKy2G61yo1yCs6IbOnu4sLqX1GGrWoUlm1G2g/htmlRecords/submit' name='form' id='form' method='POST'
           acceptCharset="UTF-8" encType='multipart/form-data'
           target="hidden_iframe"
-          onSubmit={() => toast.success("✅ Application submitted successfully")}
+          onSubmit={() => toast.success("Application submitted successfully")}
           className="space-y-8">
           <input type="hidden" name="zf_redirect_url" value="http://localhost:5173/careers" />
           {/* Row 1 */}
@@ -195,6 +215,8 @@ export default function ApplyForm() {
             <input
               type="file"
               name="FileUpload"
+              accept=".pdf"
+              onChange={handleFileChange}
               className="text-white/60"
             />
             {errors.resume && <p className="text-red-400 text-xs">{errors.resume}</p>}
@@ -212,6 +234,15 @@ export default function ApplyForm() {
           <button
             type="submit"
             className="border border-white/20 px-6 py-2 rounded-full hover:bg-white hover:text-black transition"
+            onSubmit={(e: { preventDefault: () => void; }) => {
+              if (!form.resume) {
+                e.preventDefault();
+                toast.error("Please upload a PDF resume");
+                return;
+              }
+
+              toast.success("Application submitted successfully");
+            }}
           >
             Submit →
           </button>
